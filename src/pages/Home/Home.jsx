@@ -15,7 +15,7 @@ export default function Home() {
 const Banner = styled.div`
   width: 100%;
   height: 500px;
-  background-image: url("src/assets/banner.jpg");
+  background-image: url("./banner.jpg");
   background-size: 100% 100%;
   background-position: center center;
 `;
