@@ -23,6 +23,7 @@ export default function Nav() {
 
 const Container = styled.nav`
   width: 1200px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;

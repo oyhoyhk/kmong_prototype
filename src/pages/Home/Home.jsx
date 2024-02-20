@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Nav from "./Nav";
 import Brand from "./Brand";
+import Banner from "./Banner";
+import ProductList from "./ProductsList";
 
 export default function Home() {
   return (
@@ -8,19 +10,12 @@ export default function Home() {
       <Banner />
       <Nav />
       <Brand />
+      <ProductList />
     </Container>
   );
 }
 
-const Banner = styled.div`
-  width: 100%;
-  height: 500px;
-  background-image: url("./banner.jpg");
-  background-size: 100% 100%;
-  background-position: center center;
-`;
-
 const Container = styled.div`
-  width: 1200px;
+  width: 100vw;
   margin: 0 auto;
 `;

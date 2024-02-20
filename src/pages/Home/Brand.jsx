@@ -4,26 +4,32 @@ const list = [
   {
     title: "MISSHA",
     name: "미샤",
+    color: "black",
   },
   {
     title: "A'pieu",
     name: "어퓨",
+    color: "blue",
   },
   {
     title: "CHOGONGJIN",
     name: "초공진",
+    color: "green",
   },
   {
     title: "stila",
     name: "스틸라",
+    color: "gray",
   },
   {
     title: "Cellapy",
     name: "셀라피",
+    color: "purple",
   },
   {
     title: "LAPOTICELL",
     name: "라포티셀",
+    color: "brown",
   },
 ];
 
@@ -35,7 +41,7 @@ export default function Brand() {
       <BoxContainer>
         {list.map((item, index) => (
           <Box key={index}>
-            <BoxImage>{item.title}</BoxImage>
+            <BoxImage color={item.color}>{item.title}</BoxImage>
             <div>{item.name}</div>
           </Box>
         ))}
@@ -47,7 +53,7 @@ export default function Brand() {
 const BoxImage = styled.div`
   width: 160px;
   height: 160px;
-  background: black;
+  background: ${(props) => props.color};
   color: white;
   font-weight: 700;
   display: flex;
