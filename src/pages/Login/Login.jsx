@@ -54,7 +54,8 @@ export default function Login() {
       sessionStorage.setItem("name", info.id.value);
       navigate("/");
     } catch (e) {
-      if (e.response.status === 401) {
+      console.error(e);
+      if (e?.response?.status === 401) {
         setError("아이디 또는 비밀번호가 일치하지 않습니다.");
       } else {
         setError("서버 오류입니다. 잠시 후 다시 시도해주세요.");

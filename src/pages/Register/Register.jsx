@@ -79,7 +79,7 @@ export default function Register() {
       sessionStorage.setItem("name", info.name.value);
       navigator("/");
     } catch (e) {
-      if (e.response.status === 409) {
+      if (e?.response?.status === 409) {
         setError("이미 존재하는 아이디입니다.");
         return;
       }
