@@ -37,7 +37,7 @@ export default function Brand() {
   return (
     <Container>
       <h1>브랜드관</h1>
-      <h3>PURE Shop의 다양한 브랜드를 만나보세요</h3>
+      <h3>PURE SHOP의 다양한 브랜드를 만나보세요</h3>
       <BoxContainer>
         {list.map((item, index) => (
           <Box key={index}>

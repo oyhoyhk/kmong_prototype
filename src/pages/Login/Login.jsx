@@ -1,12 +1,16 @@
 import { Button, Checkbox, Input, TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import instance from "../../lib/axios";
 
 export default function Login() {
+  const conRef = useRef();
   const idRef = useRef();
   const passwordRef = useRef();
+
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const [info, setInfo] = useState({
     id: {
@@ -42,7 +46,20 @@ export default function Login() {
       });
       return;
     }
-    alert("로그인 시도!");
+    try {
+      await instance.post("/login", {
+        id: info.id.value,
+        password: info.password.value,
+      });
+      sessionStorage.setItem("name", info.id.value);
+      navigate("/");
+    } catch (e) {
+      if (e.response.status === 401) {
+        setError("아이디 또는 비밀번호가 일치하지 않습니다.");
+      } else {
+        setError("서버 오류입니다. 잠시 후 다시 시도해주세요.");
+      }
+    }
   };
 
   const handleChange = (e) => {
@@ -64,9 +81,9 @@ export default function Login() {
   }, [info]);
 
   return (
-    <Container>
+    <Container ref={conRef}>
       <h1>로그인</h1>
-      <p>PURE Shop의 다양한 혜택을 누리세요.</p>
+      <p>PURE SHOP의 다양한 혜택을 누리세요.</p>
       <Form>
         <TextField
           label="아이디"
@@ -78,7 +95,6 @@ export default function Login() {
           value={info.id.value}
           ref={idRef}
           error={info.id.error}
-          onFocus={() => console.log("id focus")}
         />
         <TextField
           label="비밀번호"

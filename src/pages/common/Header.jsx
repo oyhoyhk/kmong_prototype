@@ -9,6 +9,13 @@ import { useEffect, useState } from "react";
 export default function Header() {
   const path = useLocation().pathname;
   const [scroll, setScroll] = useState(0);
+  const [username, setUsername] = useState("");
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("name");
+    setUsername("");
+  };
+
   useEffect(() => {
     const scrollHandler = () => {
       var targetDiv = document.getElementById("targetDiv");
@@ -22,17 +29,43 @@ export default function Header() {
       window.removeEventListener("scroll", scrollHandler);
     };
   }, [scroll]);
+
+  useEffect(() => {
+    const name = sessionStorage.getItem("name");
+    if (name) {
+      setUsername(name);
+    }
+  });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [path]);
+
   return (
     <HeaderContainer className={scroll > 500 || path !== "/" ? "on" : ""}>
       <Container>
         <div />
         <ButtonContainer>
-          <Link to="/login">
-            <b>로그인</b>
-          </Link>
-          <Link to="/register">
-            <b>회원가입</b>
-          </Link>
+          {!username && (
+            <Link to="/login">
+              <b>로그인</b>
+            </Link>
+          )}
+          {!username && (
+            <Link to="/register">
+              <b>회원가입</b>
+            </Link>
+          )}
+          {username && (
+            <Link to="/">
+              <b>안녕하세요 {username}님</b>
+            </Link>
+          )}
+          {username && (
+            <Link to="/" onClick={handleLogout}>
+              <b>로그아웃</b>
+            </Link>
+          )}
         </ButtonContainer>
       </Container>
       <Container style={{ height: "60px" }}>
